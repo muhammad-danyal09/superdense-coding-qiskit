@@ -1,6 +1,6 @@
 # Quantum Superdense Coding: Entanglement-Assisted Classical Communication using Qiskit
 
-A Qiskit-based implementation and experimental verification of the **Superdense Coding Protocol** — the quantum information protocol that allows two classical bits to be transmitted using only a single qubit of quantum communication, provided the sender and receiver pre-share one entangled qubit pair (e-bit). The protocol is implemented for a fixed classical input and independently re-validated using a randomized bit generator, with all results confirmed on the Qiskit Aer simulator.
+A Qiskit-based implementation and experimental verification of the **Superdense Coding Protocol**. It is the quantum information protocol that allows two classical bits to be transmitted using only a single qubit of quantum communication, provided the sender and receiver pre-share one entangled qubit pair (e-bit). The protocol is implemented for a fixed classical input and independently re-validated using a randomized bit generator, with all results confirmed on the Qiskit Aer simulator.
 
 ---
 
@@ -22,14 +22,12 @@ A Qiskit-based implementation and experimental verification of the **Superdense 
 7. [Merits](#merits)
 8. [Limitations](#limitations)
 9. [Conclusion](#conclusion)
-10. [Future Work](#future-work)
-11. [Author](#author)
 
 ---
 
 ## Overview
 
-Superdense coding is a quantum communication protocol that encodes **two classical bits into a single qubit**, on the condition that the sender ("Alice") and receiver ("Bob") already share one half each of an entangled Bell pair (an e-bit). It achieves an aim complementary to quantum teleportation: where teleportation uses two classical bits and one e-bit to transmit one qubit, superdense coding uses one e-bit and one transmitted qubit to communicate two classical bits.
+Superdense coding is a quantum communication protocol that encodes **two classical bits into a single qubit**, with the condition that the sender ("Alice") and receiver ("Bob") already share one half each of an entangled Bell pair (an e-bit). It achieves an aim complementary to quantum teleportation: where teleportation uses two classical bits and one e-bit to transmit one qubit, superdense coding uses one e-bit and one transmitted qubit to communicate two classical bits.
 
 This project implements the full protocol in Qiskit, verifies it against the theoretical predictions of Bell-state transformations, and validates it under two conditions:
 1. A **fixed, known 2-bit input** (`c = 1`, `d = 0`), used to confirm deterministic correctness.
@@ -39,7 +37,7 @@ This project implements the full protocol in Qiskit, verifies it against the the
 
 ### 2.1 Superdense Coding and Holevo's Theorem
 
-Sending a qubit is technologically far more demanding than sending a classical bit. Without shared entanglement, a single transmitted qubit cannot communicate more than one classical bit of information — this is a consequence of **Holevo's theorem**. Superdense coding demonstrates that this limit can be broken *if* entanglement is pre-shared:
+Sending a qubit is technologically far more demanding than sending a classical bit. Without shared entanglement, a single transmitted qubit cannot communicate more than one classical bit of information. This is a consequence of **Holevo's theorem**. Superdense coding demonstrates that this limit can be broken *if* entanglement is pre-shared:
 
 > "Shared entanglement can effectively double the classical information capacity of a transmitted qubit."
 
@@ -80,7 +78,7 @@ After Bob's decoding operations (CNOT then Hadamard on Alice's qubit), the four 
 | \|ψ⁺⟩ | \|10⟩ |
 | \|ψ⁻⟩ | \|11⟩ |
 
-Bob's measurement therefore reveals exactly which Bell state Alice prepared — and hence exactly which 2-bit message she sent — using only the single qubit `A` that was physically transmitted.
+Bob's measurement therefore reveals exactly which Bell state Alice prepared and hence exactly which 2-bit message she sent, using only the single qubit `A` that was physically transmitted.
 
 **Verification cases** confirmed in this project:
 - `cd = 00` → Bob recovers `00`
@@ -95,12 +93,11 @@ Bob's measurement therefore reveals exactly which Bell state Alice prepared — 
 ├── Superdense_Coding.ipynb        # Main notebook (protocol, simulations, analysis)
 └── images/
     ├── circuit_fixed_input.png        # Circuit diagram — fixed classical bits (c=1, d=0)
-    ├── histogram_fixed_input.png      # Measurement histogram — fixed input
-    ├── circuit_randomized.png         # Circuit diagram — with random bit generator
-    └── histogram_randomized.png       # Measurement histogram — randomized input
-```
+    ├── histogram_fixed_input.png      # Measurement histogram for fixed input
+    ├── circuit_randomized.png         # Circuit diagram with random bit generator
+    └── histogram_randomized.png       # Measurement histogram for randomized input
 
-> **Note on image paths:** The image links in this README use the relative path `images/<filename>.png`. Place your four exported images inside an `images/` folder at the root of the repository (same level as `README.md`), using the filenames shown above, and they will render automatically on GitHub without any further configuration.
+```
 
 ## Requirements and Installation
 
@@ -167,35 +164,15 @@ Each 4-bit outcome is structured as Alice's bits followed by Bob's bits (`c_Alic
 ## Merits
 
 - **Doubles classical channel capacity:** Demonstrates that entanglement allows one transmitted qubit to carry two classical bits, directly illustrating the practical consequence of Holevo's theorem.
-- **Deterministic and verifiable:** The protocol was validated both for a fixed test case and for a full random sweep of all four possible messages, giving strong confidence in correctness.
-- **Minimal and pedagogically clear:** Uses only single-qubit gates (I, X, Z) and two-qubit gates (CNOT, Hadamard-based decoding), making the entanglement-assisted communication effect easy to isolate and study.
-- **Directly complementary to teleportation:** Provides an instructive counterpart to the quantum teleportation protocol, reinforcing understanding of Bell-state manipulation and measurement.
-- **Randomized validation:** Going beyond a single fixed test case, the on-circuit random bit generator confirms protocol correctness is not an artifact of one specific input.
+- **Deterministic, verifiable and randomized validation:** The protocol was validated both for a fixed test case and for a full random sweep of all four possible messages, giving strong confidence in correctness. Going beyond a single fixed test case, the on-circuit random bit generator confirms protocol correctness is not an artifact of one specific input.
 
 ## Limitations
 
 - **Ideal simulator only:** All results were obtained on the noiseless Qiskit Aer simulator. No noise model or real quantum hardware execution was used, so realistic error rates, decoherence, and gate infidelities are not captured.
-- **No error correction or mitigation:** The project does not implement any error-mitigation techniques, so it cannot yet speak to the protocol's practical robustness on NISQ-era hardware.
 - **Small-scale demonstration:** The protocol is shown for a single 2-bit message per run; it does not address scaling to multi-qubit / multi-bit generalized dense coding schemes.
-- **No physical channel modeling:** The "transmission" of the qubit from Alice to Bob is simulated within a single circuit rather than across two physically separated systems, which is a common simplification in introductory implementations.
 
 ## Conclusion
 
-Both simulations — the fixed deterministic case and the fully randomized case — confirm **100% fidelity** of the superdense coding protocol implemented here. Bob correctly recovers Alice's two classical bits from a single transmitted qubit in every shot, for every possible input combination. This validates the theoretical claim that shared entanglement doubles the classical information capacity of a single transmitted qubit, and provides a clean, hardware-independent demonstration of one of quantum information theory's foundational results.
-
-## Future Work
-
-- Execute the protocol on real IBM Quantum hardware and compare fidelity against the ideal simulator baseline.
-- Introduce a realistic noise model to study the protocol's robustness under decoherence and gate errors.
-- Extend the implementation to explore generalized dense coding with higher-dimensional entangled systems (qudits).
-
-## Author
-
-**Muhammad Danyal**
-Physics graduate, currently building a foundation in quantum computing and data analysis ahead of graduate-level (MS) study applications.
+Both the fixed deterministic case and the fully randomized case validations confirm **100% fidelity** of the superdense coding protocol implemented here. Bob correctly recovers Alice's two classical bits from a single transmitted qubit in every shot, for every possible input combination. This validates the theoretical claim that shared entanglement doubles the classical information capacity of a single transmitted qubit, and provides a clean, hardware-independent demonstration of one of quantum information theory's foundational results.
 
 ---
-
-### Suggested CV Description
-
-> Implemented and experimentally verified the quantum superdense coding protocol using Qiskit, demonstrating that shared entanglement enables a single transmitted qubit to reliably carry two classical bits. Validated the protocol with 100% fidelity across both a fixed deterministic test case and a fully randomized on-circuit input sweep, using the Qiskit Aer simulator.
