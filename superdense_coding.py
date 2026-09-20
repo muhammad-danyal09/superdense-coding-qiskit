@@ -1,5 +1,4 @@
 # Superdense Coding
-# Source: Superdense coding.ipynb (Google Drive: Project super dense coding)
 
 ### 1. Installing Qiskit packages
 # This section installs relevant Qiskit packages to proceed with the project.
