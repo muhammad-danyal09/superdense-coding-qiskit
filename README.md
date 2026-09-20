@@ -1,4 +1,4 @@
-# Quantum Superdense Coding: Entanglement-Assisted Classical Communication using Qiskit
+# Quantum Superdense Coding: Entanglement Assisted Classical Communication using Qiskit
 
 A Qiskit-based implementation and experimental verification of the **Superdense Coding Protocol**. It is the quantum information protocol that allows two classical bits to be transmitted using only a single qubit of quantum communication, provided the sender and receiver pre-share one entangled qubit pair (e-bit). The protocol is implemented for a fixed classical input and independently re-validated using a randomized bit generator, with all results confirmed on the Qiskit Aer simulator.
 
