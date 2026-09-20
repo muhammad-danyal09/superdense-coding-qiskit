@@ -92,7 +92,7 @@ Bob's measurement therefore reveals exactly which Bell state Alice prepared and 
 ├── README.md
 ├── Superdense_Coding.ipynb        # Main notebook (protocol, simulations, analysis)
 └── images/
-    ├── circuit_fixed_input.png        # Circuit diagram — fixed classical bits (c=1, d=0)
+    ├── circuit_fixed_input.png        # Circuit diagram for fixed classical bits (c=1, d=0)
     ├── histogram_fixed_input.png      # Measurement histogram for fixed input
     ├── circuit_randomized.png         # Circuit diagram with random bit generator
     └── histogram_randomized.png       # Measurement histogram for randomized input
@@ -159,7 +159,7 @@ Each 4-bit outcome is structured as Alice's bits followed by Bob's bits (`c_Alic
 
 - **Fixed-input test:** 100% success rate (4096/4096 shots) in recovering the exact transmitted message `cd = 10`.
 - **Randomized-input test:** 100% success rate across all four possible 2-bit messages, with no decoding errors observed in any of the 4096 shots.
-- Both experiments confirm the theoretical prediction that superdense coding allows a single transmitted qubit, combined with one pre-shared e-bit, to reliably communicate two classical bits.
+Both experiments confirm the theoretical prediction that superdense coding allows a single transmitted qubit, combined with one pre-shared e-bit, to reliably communicate two classical bits.
 
 ## Merits
 
