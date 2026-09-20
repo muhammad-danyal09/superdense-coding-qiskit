@@ -90,8 +90,9 @@ Bob's measurement therefore reveals exactly which Bell state Alice prepared and 
 
 ```
 ├── README.md
-├── Superdense_Coding.ipynb        # Main notebook (protocol, simulations, analysis)
-└── images/
+├── superdense_Coding.ipynb      # Main notebook (protocol, simulations, analysis)
+├── superdense_coding.py
+└──images/
     ├── circuit_fixed_input.png        # Circuit diagram for fixed classical bits (c=1, d=0)
     ├── histogram_fixed_input.png      # Measurement histogram for fixed input
     ├── circuit_randomized.png         # Circuit diagram with random bit generator
